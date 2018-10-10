@@ -1,0 +1,12 @@
+<div class="columns is-centered">
+  <div class="column">
+    <h5 class="subtitle"><%= @question.question%></h5>
+    <%= simple_form_for(@question, defaults: {label: false}) do |f| %>
+    <%= f.error_notification%>
+    <%= f.input :answer, input_html: { class: "textarea "}, wrapper: false, placeholder: "You answer!" %>
+      <%= f.button :submit, "Answer", class: "button button is-primary" %>
+      <%= link_to 'Cancel', questions_path, class:'button is-light' %>
+  </div>
+</div>
+<% end %>
+

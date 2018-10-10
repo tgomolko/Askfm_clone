@@ -1,0 +1,44 @@
+<%=  render 'profile'%>
+<div class="container is-show-user">
+  <div class="columns is-centered is-show">
+    <div class="column is-4 is-profile">
+      <figure class="image is-128x128">
+          <% if @user.avatar.present?%>
+          <%= image_tag(@user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
+          <% else %>
+          <%= image_tag('ask-user.png', :class => "is-rounded") %>
+
+          <% end %>
+      </figure>
+    <h2 class="subtitle is-2 is-profile">Hey, <%= @user.name%></h2>
+    <h5 class="subtitle is-5 is-profile">@<%= @user.username%></h5>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column">
+         <%=  render 'questions/form'%>
+    </div>
+    </div>
+  </div>
+</div>
+
+<% @answered_questions.each do |question| %>
+<section class="section is-index-q">
+  <div class="container">
+      <div class="box">
+          <strong><p><%= question.question %></p></strong>
+          <small><%= time_ago_in_words(question.created_at) %> ago</small>
+          <p><%= question.answer %>
+        <% if current_user.present? and current_user.id == question.user_id %>
+         <%= link_to question, method: :delete, data: { confirm: "Are you sure you want to delete this answer?" } do %>
+                  <span class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+              <% end %>
+              </p>
+        <% end %>
+      </div>
+  </div>
+</section>
+<% end %>

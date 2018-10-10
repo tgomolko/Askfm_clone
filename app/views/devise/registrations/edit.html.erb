@@ -1,0 +1,89 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-4">
+      <h2 class="subtitle is-2">Editing profile information</h2>
+      
+      <figure class="image is-128x128 in-profile">
+        <% if resource.avatar.present?%>
+            <%= image_tag(@user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
+          <% else %>
+            <%= image_tag('ask-user.png', :class => "is-rounded") %>
+          <% end %> 
+      </figure>
+     
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), defaults: {label: false}, html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
+
+          <div class="field">
+           <div class="control">
+            <%= f.input :name, required: true, autofocus: true, input_html: { class:"input", placeholder: "Name"}, wrapper: false  %>
+            </div>
+          </div>
+
+          <div class="field">
+           <div class="control">
+             <%= f.input :username, required: true, input_html: { class:"input", placeholder: "Username" }, wrapper: false  %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+            <%= f.input :email, required: true, input_html: { class:"input", placeholder: "Email" }, wrapper: false %>
+            </div>
+          </div>
+
+          <div class="field">
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
+          </div>
+
+          <div class="field">
+            <div class="control">
+            <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false, input_html: { class: "input", placeholder: "Password"}, wrapper: false %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+            <%= f.input :password_confirmation, required: false, input_html: { class: "input", placeholder: "Password confirmation"}, wrapper: false %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, input_html: { class: "input", placeholder: "Current Password"}, wrapper: false %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= f.file_field :avatar, class:"is-rounded" %>
+              <%= f.hidden_field :avatar_cache %>
+              <% if resource.avatar.url.present?%>
+              <%#= image_tag(resource.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
+                <p><%= f.check_box :remove_avatar if resource.avatar.url.present? %> 
+                <label> Remove avatar</label></p>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= f.button :submit, "Update Profile", class:"button is-medium is-fullwidth" %>
+            </div>
+         </div>
+      <% end %>
+
+      <hr />
+      <h5 class="subtitle is-5">Do you want to delete your account?</h5>
+       
+        <div class="control">
+          <%= link_to "Delete", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"button button is-primary" %></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

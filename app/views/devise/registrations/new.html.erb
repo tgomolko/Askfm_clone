@@ -1,0 +1,59 @@
+<div class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-4">
+  
+        <h2 class="subtitle is-2">Hey, welcome!</h2>
+        <h5 class="subtitle is-5">Tell us a little about yourself.</h5>
+
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }, defaults: {label: false}) do |f| %>
+      <%= f.error_notification %>
+   
+        <div class="field">
+          <div class="field">
+            <%= f.input :name, required: true, autofocus: true, input_html: { class:"input", placeholder: "Name"}, wrapper: false  %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+          <%= f.input :username, required: true, input_html: { class:"input", placeholder: "Username" }, wrapper: false  %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+          <%= f.input :email, required: true, input_html: { class:"input", placeholder: "Email" }, wrapper: false %>
+          </div>
+        </div>
+  
+        <div class="field">
+          <div class="control">
+            <%= f.input :password, required: true, input_html: { class:"input", placeholder: "Password" }, wrapper: false %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :password_confirmation, required: true, input_html: { class: "input", placeholder: "Password confirmation" }, wrapper: false %>   
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.file_field :avatar %>
+            <%= f.hidden_field :avatar_cache %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.button :submit, "Sign up", class:"button is-medium is-fullwidth" %>
+          </div>
+        </div>
+     
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<section class="section is-index-q">
+  <div class="container">
+    <div class="columns">
+      <div class="box">
+        <div class="media-content">
+          <% if @questions.count < 1 %>
+            <strong><p>You don't have any question now :(</p></strong>
+          <% else %>    
+             <strong><p>Question (<%= @questions.count %>)</p></strong>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</section>
+
+<% @questions.each do |question| %>
+<section class="section is-index-q">
+  <div class="container">
+      <div class="box">
+          <strong><p><%= question.question %></p></strong>
+          <%= time_ago_in_words(question.created_at) %>
+        <div class="question-btn">   
+          <%= link_to "Answer", edit_question_path(question), class:"button is-rounded" %> 
+          <%= link_to "Delete", question_path(question), method: :delete ,data: { confirm: "Are you sure?" }, class:"button button is-rounded" %>
+      </div>
+  </div>
+</section>
+<% end %>
+
