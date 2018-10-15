@@ -19,6 +19,7 @@
               <strong><%= @user.name %></strong><br />
               <small><%= @user.username %></small>
             </p>
+
           </div>
         </div>
       </article>
@@ -34,13 +35,19 @@
         <div class="level-item has-centered-text">
           <div>
             <p class="heading">Following</p>
-            <p class="title is-6">123</p>
+              <%= link_to @user.following.count, following_user_path(@user), class: "title is-6"%>
           </div>
         </div>
           <div class="level-item has-centered-text">
           <div>
             <p class="heading">Followers</p>
-            <p class="title is-6">465K</p>
+              <%= link_to @user.followers.count, followers_user_path(@user), class: "title is-6"%>
+          </div>
+        </div>
+
+        <div class="level-item has-centered-text">
+          <div>
+            <p class="heading"><%= render 'follow_form'%></p>       
           </div>
         </div>
       </div>

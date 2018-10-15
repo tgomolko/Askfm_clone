@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers, :feed]
   before_action :authenticate_user!, except: [:show, :index]
   
   def index
@@ -13,6 +13,18 @@ class UsersController < ApplicationController
     @question =  Question.new
     @question.user_id = params[:id]
     @answered_questions = @user.questions.where(answered: true).order("created_at DESC")
+  end
+
+  def following
+    @following_users = @user.following
+  end
+
+  def followers
+    @user_followers = @user.followers
+  end
+
+  def feed
+    @feeds = Question.where(user_id: @user.following_ids, answered: true).order("created_at DESC")
   end
 
   private

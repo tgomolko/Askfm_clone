@@ -1,0 +1,42 @@
+<div class="follow">
+  <% if @user_followers.any? %>
+    <div class="column">
+      <nav class="panel">
+        <p class="panel-heading">Followers</p>
+        <% @user_followers.each do |user|%>
+          <div class="panel-block">
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-32x32">
+                  <%= link_to user , class: "is-rounded" do %>
+                    <% if user.avatar.present?%>
+                      <%= image_tag(user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
+                    <% else %>
+                      <%= image_tag('ask-user.png', :class => "is-rounded") %>
+                    <% end %>
+                  <% end %>
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong><%= user.name%></strong>
+                    <small>@<%= user.username %></small>
+                   
+                    <%= render partial: 'follow_form', :locals => {:user => @user} %>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        <% end %>
+      </nav>
+    </div>
+  <% else %>
+    <div class="column">
+      <nav class="panel">
+        <p class="panel-heading">You don't have any followers</p>
+      </nav>
+    </div>
+  <% end %>
+</div>

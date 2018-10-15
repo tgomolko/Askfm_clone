@@ -1,0 +1,35 @@
+<div class="follow">
+  <% if @following_users.any? %>
+    <div class="column">
+      <nav class="panel">
+        <p class="panel-heading">Who to Follow</p>
+        <% @following_users.each do |user|%>
+          <div class="panel-block">
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-32x32">
+                  <%= link_to user , class: "is-rounded" do %>
+                    <% if user.avatar.present?%>
+                      <%= image_tag(user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
+                    <% else %>
+                      <%= image_tag('ask-user.png', :class => "is-rounded") %>
+                    <% end %>
+                  <% end %>
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong><%= user.name%></strong>
+                    <small>@<%= user.username %></small>
+                    
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        <% end %>
+      </nav>
+    </div>
+  <% end %>
+</div>

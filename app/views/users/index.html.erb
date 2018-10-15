@@ -23,24 +23,23 @@
   </section>
 <% end %>
 
-
 <div class="users-index"> 
   <h1 class="title-last-users">5 last joined users!</h1>
   <h2 class="subtitle is-2">Ask them some questions!</h2>
   <% if @users.any? %>
     <div class="users-list">
       <% @users.each do |user|%>
-      <figure class="image is-128x128">
-        <%= link_to user , class: "is-rounded" do %>
-          <% if user.avatar.present?%>
-            <%= image_tag(user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
-          <% else %>
-            <%= image_tag('ask-user.png', :class => "is-rounded") %>
+        <figure class="image is-128x128">
+          <%= link_to user , class: "is-rounded" do %>
+            <% if user.avatar.present?%>
+              <%= image_tag(user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
+            <% else %>
+              <%= image_tag('ask-user.png', :class => "is-rounded") %>
+            <% end %>
+            <%= user.username%>
           <% end %>
-          <%= user.username%>
-        <% end %>
-      </figure>
+        </figure>
       <% end%>
+    </div>
   <% end %>
-  </div>
 </div>
