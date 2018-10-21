@@ -6,10 +6,9 @@
         <div class="media-left">
           <figure class="image is-64x64">
              <% if @user.avatar.present?%>
-          <%= image_tag(@user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
-          <% else %>
-          <%= image_tag('ask-user.png', :class => "is-rounded") %>
-
+              <%= image_tag(@user.avatar.url(:thumb).to_s, :class => "is-rounded" )  %> 
+            <% else %>
+              <%= image_tag('ask-user.png', :class => "is-rounded") %>
           <% end %>
           </figure>
         </div>
@@ -19,7 +18,6 @@
               <strong><%= @user.name %></strong><br />
               <small><%= @user.username %></small>
             </p>
-
           </div>
         </div>
       </article>
@@ -29,25 +27,25 @@
         <div class="level-item has-centered-text">
           <div>
             <p class="heading">Posts</p>
-            <p class="title is-6"><%= answered_questions_count %></p>
+            <strong><%= answered_questions_count %></strong>
           </div>
         </div>
         <div class="level-item has-centered-text">
-          <div>
-            <p class="heading">Following</p>
-              <%= link_to @user.following.count, following_user_path(@user), class: "title is-6"%>
-          </div>
-        </div>
-          <div class="level-item has-centered-text">
           <div>
             <p class="heading">Followers</p>
               <%= link_to @user.followers.count, followers_user_path(@user), class: "title is-6"%>
           </div>
         </div>
+          <div class="level-item has-centered-text">
+          <div>
+            <p class="heading">Following</p>
+              <%= link_to @user.following.count, following_user_path(@user), class: "title is-6"%>
+          </div>
+        </div>
 
         <div class="level-item has-centered-text">
           <div>
-            <p class="heading"><%= render 'follow_form'%></p>       
+            <p class="heading"><%= render 'follow_form'%></p>  
           </div>
         </div>
       </div>

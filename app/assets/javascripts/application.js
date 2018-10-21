@@ -14,4 +14,22 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
- setTimeout("$('.notification').fadeOut(3000).slideUp(500)");
+setTimeout("$('.notification').fadeOut(3000).slideUp(500)");
+//Sticky navbar
+$(document).ready(function() {
+  var stickyNavTop = $('.navbar').offset().top;
+
+  var stickyNav = function(){
+    var scrollTop = $(window).scrollTop(); 
+         
+    if (scrollTop > stickyNavTop) { 
+        $('.navbar').addClass('sticky');
+    } else {
+        $('.navbar').removeClass('sticky'); 
+    }
+};
+  stickyNav();
+$(window).scroll(function() {
+  stickyNav();
+  });
+});
